@@ -1,10 +1,8 @@
-#!/usr/bin/env python3
-
 from __future__ import print_function
 
 from core.colors import end, red, white, bad, info
 
-# Just a fancy ass banner
+
 print('''%s
 \tXSStrike %sv3.1.4
 %s''' % (red, white, end))
@@ -20,16 +18,16 @@ try:
         os.system('pip3 install fuzzywuzzy')
         print ('%s fuzzywuzzy has been installed, restart XSStrike.' % info)
         quit()
-except ImportError:  # throws error in python2
+except ImportError:  
     print('%s XSStrike isn\'t compatible with python2.\n Use python > 3.4 to run XSStrike.' % bad)
     quit()
 
-# Let's import whatever we need from standard lib
+
 import sys
 import json
 import argparse
 
-# ... and configurations core lib
+
 import core.config
 import core.log
 
@@ -81,8 +79,7 @@ parser.add_argument('--log-file', help='Name of the file to log', dest='log_file
                     default=core.log.log_file)
 args = parser.parse_args()
 
-# Pull all parameter values of dict from argparse namespace into local variables of name == key
-# The following works, but the static checkers are too static ;-) locals().update(vars(args))
+
 target = args.target
 path = args.path
 jsonData = args.jsonData
@@ -111,7 +108,7 @@ logger = core.log.setup_logger()
 
 core.config.globalVariables = vars(args)
 
-# Import everything else required from core lib
+
 from core.config import blindPayload
 from core.encoders import base64
 from core.photon import photon
@@ -157,11 +154,11 @@ encoding = base64 if encode and encode == 'base64' else False
 if not proxy:
     core.config.proxies = {}
 
-if update:  # if the user has supplied --update argument
+if update:  
     updater()
-    quit()  # quitting because files have been changed
+    quit()  
 
-if not target and not args_seeds:  # if the user hasn't supplied a url
+if not target and not args_seeds: 
     logger.no_format('\n' + parser.format_help().lower())
     quit()
 
