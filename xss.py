@@ -31,7 +31,7 @@ import argparse
 import core.config
 import core.log
 
-# Processing command line arguments, where dest var names will be mapped to local vars with the same name
+
 parser = argparse.ArgumentParser()
 parser.add_argument('-u', '--url', help='url', dest='target')
 parser.add_argument('--data', help='post data', dest='paramData')
